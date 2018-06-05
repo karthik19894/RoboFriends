@@ -10,13 +10,20 @@ class App extends React.Component{
     constructor(){
         super()
         this.state={
-            robots:robots,
+            robots:[],
             searchField:''
         }
     }
 
     onSearchChange=(event)=>{
         this.setState({searchField:event.target.value});
+    }
+
+    componentDidMount(){
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response=> response.json())
+        .then(users=>this.setState({robots:users}));
+
     }
 
     render(){
